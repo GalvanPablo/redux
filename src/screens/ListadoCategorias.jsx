@@ -1,12 +1,21 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
-
 import React from 'react'
+import { FlatList, StyleSheet, View } from 'react-native'
+import { Cat } from '../components'
+
+import { CATEGORIAS } from '../data/categorias'
+
 
 const ListadoCategorias = ({ navigation }) => {
     return (
         <View style={styles.screen}>
-            <Text>ListadoCategorias</Text>
-            <Button title="X Categoría" onPress={() => navigation.navigate('Categoria')} />
+            <FlatList
+                data={CATEGORIAS}
+                renderItem={({ item }) => <Cat item={item} onPress={() => navigation.navigate('Categoria')} />}
+                keyExtractor={item => item.id}
+                numColumns={2}
+            />
+            
+            {/* <Button title="X Categoría" onPress={() => navigation.navigate('Categoria')} /> */}
         </View>
     )
 }
