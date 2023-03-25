@@ -1,20 +1,18 @@
 import { CATEGORIAS } from '../../data/categorias';
-
-import { CATEGORIA_SELECIONADA } from '../actions/categorias.action';
-
+import { SELECIONAR_CATEGORIA } from '../actions/categorias.action';
 
 const initialState = {
     categorias: CATEGORIAS,
-    categoriaSelecionada: null
+    seleccionada: null
 };
 
 const CategoriasReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CATEGORIA_SELECIONADA:
-            return {
-                ...state,
-                categoriaSelecionada: state.categorias.find(cat => cat.id === action.id)
-            }
+        case SELECIONAR_CATEGORIA:
+            const indexCategory = state.categorias.findIndex(cat => cat.id === action.id);
+            return indexCategory >= 0 ? {
+                ...state, seleccionada: state.categorias[indexCategory]
+            } : state;
         default:
             return state;
     }
